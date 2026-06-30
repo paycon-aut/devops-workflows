@@ -18,8 +18,8 @@ jobs:
 
       - name: Validate commit messages
         run: |
-          # Pattern Conventional Commits
-          PATTERN='^(feat|fix|docs|style|refactor|perf|test|chore|ci|build|revert)(\(.+\))?: .{1,100}$'
+          # Pattern Conventional Commits (com emoji opcional no início, ex: :sparkles: feat: ...)
+          PATTERN='^(:[a-z_]+: )?(feat|fix|docs|style|refactor|perf|test|chore|ci|build|revert)(\(.+\))?: .{1,100}$'
 
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             BASE="${{ github.event.pull_request.base.sha }}"
@@ -47,6 +47,7 @@ jobs:
             echo ""
             echo "Exemplos válidos:"
             echo "  feat(auth): adiciona login com Google"
+            echo "  :sparkles: feat(auth): adiciona login com Google"
             echo "  fix: corrige timeout na API"
             echo "  chore: atualiza dependências"
             exit 1
